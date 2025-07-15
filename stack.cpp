@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-const int MAX_STACK = 5;
+const int MAX_STACK = 20;
 
 // Stack untuk menyimpan status sebelumnya
 string undoStack[MAX_STACK];
