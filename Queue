@@ -1,0 +1,99 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+//Batas Maksimal Input Lagu
+const int MAX = 8;
+
+// Array Sebagai Queue Playlist
+string playlist[MAX];
+int front = 0, rear = 0;
+
+// Mengecek Apakah Queue Penuh
+bool isFull() {
+    return rear == MAX;
+}
+
+// Mengecek Apakah Queue Kosong
+bool isEmpty() {
+    return front == rear;
+}
+
+// Menambahkan Lagu ke Playlist
+void tambahLagu() {
+    if (isFull()) {
+        cout << "Playlist penuh!\n";
+        return;
+    }
+    string judul;
+    cout << "Masukkan judul lagu: ";
+    cin.ignore(); 
+    getline(cin, judul);
+    playlist[rear++] = judul;
+    cout << "Lagu \"" << judul << "\" berhasil ditambahkan.\n";
+}
+
+// Memutar Lagu Berikutnya
+void putarLagu() {
+    if (isEmpty()) {
+        cout << "Playlist kosong!\n";
+        return;
+    }
+    cout << "Memutar lagu: " << playlist[front] << endl;
+
+    // Geser Elementary ke Depan
+    for (int i = front; i < rear - 1; i++) {
+        playlist[i] = playlist[i + 1];
+    }
+    rear--;
+}
+
+// Menampilkan Isi Playlist yang Diinput
+void tampilkanPlaylist() {
+    if (isEmpty()) {
+        cout << "Playlist kosong!\n";
+        return;
+    }
+    cout << "Daftar lagu dalam playlist:\n";
+    for (int i = front; i < rear; i++) {
+        cout << i - front + 1 << ". " << playlist[i] << endl;
+    }
+}
+
+int main() {
+    int pilihan;
+
+    // Tampilkan Seluruh Menu
+    cout << "===============================";
+    cout << "\nNama = RAAFI PRAWIRA SETIAMUDO";
+    cout << "\nNIM  = 32602400100";
+    cout << "\n===============================\n";
+    cout << "<<<< Playlist Pemutar Lagu >>>>\n";
+    cout << "1. Tambahkan lagu ke playlist\n";
+    cout << "2. Putar lagu berikutnya\n";
+    cout << "3. Tampilkan playlist\n";
+    cout << "4. Keluar\n";
+
+    // Loop Menu Menggunakan Switch-Case
+    while (true) {
+        cout << "\nPilihan: ";
+        cin >> pilihan;
+
+        switch (pilihan) {
+            case 1:
+                tambahLagu();
+                break;
+            case 2:
+                putarLagu();
+                break;
+            case 3:
+                tampilkanPlaylist();
+                break;
+            case 4:
+                cout << "Program selesai. Terima kasih!\n";
+                return 0;
+            default:
+                cout << "Pilihan tidak valid!\n";
+        }
+    }
+}
